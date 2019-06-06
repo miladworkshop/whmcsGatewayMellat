@@ -1,8 +1,10 @@
 <?php
-/*
-	author	: Milad Maldar
-	URL		: http://miladworkshop.ir
-*/
+/* --------------------------------------------------
+-	Author 		: Milad Maldar 						-
+-	Version 	: 2.0 								-
+-	Author URL 	: http://miladworkshop.ir 			-
+-	Module URL	: https://vrl.ir/whmcs-mellat 		-
+-------------------------------------------------- */
 
 if(file_exists('../../../init.php')){require( '../../../init.php' );}else{require("../../../dbconnect.php");}
 include("../../../includes/functions.php");

@@ -1,10 +1,13 @@
 <?php
-/*
-	author 	: Milad Maldar
-	URL		: http://miladworkshop.ir
-*/
+/* --------------------------------------------------
+-	Author 		: Milad Maldar 						-
+-	Version 	: 2.0 								-
+-	Author URL 	: http://miladworkshop.ir 			-
+-	Module URL	: https://vrl.ir/whmcs-mellat 		-
+-------------------------------------------------- */
 
-function mellat_config(){
+function mellat_config()
+{
     $configarray = array(
 		"FriendlyName" 			=> array("Type" => "System", "Value"=>"ماژول درگاه بانک ملت"),
 		"terminalId" 			=> array("FriendlyName" => "شماره پایانه", "Type" => "text", "Size" => "50", ),
@@ -19,22 +22,22 @@ function mellat_config(){
 	return $configarray;
 }
 
-function mellat_link($params) {
+function mellat_link($params)
+{
     $currencies = $params['Currencies'];
     $invoiceid 	= $params['invoiceid'];
-    $amount 	= $params['amount'];
     $email 		= $params['clientdetails']['email'];
+    $amount 	= $params['amount'];
+	$amount 	= $params['amount'] - '.00';
+	$amount 	= ($currencies == 'toman') ? intval($amount) * 10 : intval($amount);
 
-	$amount = $params['amount']-'.00';
-	if($params['Currencies'] == 'toman'){
-		$amount = round($amount*10);
-	}
-	
 	$code = '<form method="post" action="modules/gateways/mellat/pay.php">
 	<input type="hidden" name="invoiceid" value="'. $invoiceid .'" />
 	<input type="hidden" name="amount" value="'. $amount .'" />
 	<input type="hidden" name="email" value="'. $email .'" />
+	<input type="hidden" name="currencies" value="'. $currencies .'" />
 	<input type="submit" name="pay" value=" پرداخت " /></form>';
+
 	return $code;
 }
 ?>
